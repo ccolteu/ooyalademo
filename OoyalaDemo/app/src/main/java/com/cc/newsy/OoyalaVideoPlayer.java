@@ -13,7 +13,7 @@ import java.util.Observer;
 
 public class OoyalaVideoPlayer implements Observer {
 
-    public static final String DOMAIN = "http://android.cc.com";
+    public static final String DOMAIN = "http://android.newsy.com";
     public static final String ADSET_CODE = "545689667ddd485eafeb574426315d86";
     private static final String PCODE = "94b2a1894a934bf480f92b7834111093";
     private OoyalaPlayer mOoyalaPlayer;
