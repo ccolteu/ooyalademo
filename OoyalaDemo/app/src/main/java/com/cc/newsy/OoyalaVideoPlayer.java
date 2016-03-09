@@ -1,5 +1,6 @@
-package com.cc.ooyalademo;
+package com.cc.newsy;
 
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.ooyala.android.OoyalaPlayer;
@@ -7,23 +8,23 @@ import com.ooyala.android.OoyalaPlayerLayout;
 import com.ooyala.android.PlayerDomain;
 import com.ooyala.android.ui.OoyalaPlayerLayoutController;
 
-public class OoyalaVideoPlayer {
+import java.util.Observable;
+import java.util.Observer;
+
+public class OoyalaVideoPlayer implements Observer {
 
     public static final String DOMAIN = "http://android.cc.com";
-    public static final String ADSET_CODE = "b684d84a764b487d9aea08751caf245b";//"545689667ddd485eafeb574426315d86";
+    public static final String ADSET_CODE = "545689667ddd485eafeb574426315d86";
     private static final String PCODE = "94b2a1894a934bf480f92b7834111093";
     private OoyalaPlayer mOoyalaPlayer;
     private OoyalaPlayerLayoutController mPlayerLayoutController;
 
     public void init(ViewGroup videoPlayerLayout) {
         if (mOoyalaPlayer == null) {
-
             mOoyalaPlayer = new OoyalaPlayer(PCODE, new PlayerDomain(DOMAIN));
-            mPlayerLayoutController =
-                    new OoyalaPlayerLayoutController((OoyalaPlayerLayout)videoPlayerLayout,
-                            mOoyalaPlayer);
-
+            mPlayerLayoutController = new OoyalaPlayerLayoutController((OoyalaPlayerLayout)videoPlayerLayout, mOoyalaPlayer);
             mPlayerLayoutController.setFullscreenButtonShowing(false);
+            mOoyalaPlayer.addObserver(this);
         }
     }
 
@@ -33,24 +34,13 @@ public class OoyalaVideoPlayer {
         mOoyalaPlayer.play();
     }
 
-    public void pause() {
-        mOoyalaPlayer.pause();
-    }
-
-    public void suspend() {
-        mOoyalaPlayer.suspend();
-    }
-
-    public void setVisibility(int visibility) {
-        mOoyalaPlayer.getLayout().setVisibility(visibility);
-        if (visibility == ViewGroup.VISIBLE) {
-            mPlayerLayoutController.getControls().setVisible(true);
-        } else {
-            mPlayerLayoutController.getControls().setVisible(false);
+    @Override
+         public void update(Observable observable, Object data) {
+        if (data == OoyalaPlayer.AD_COMPLETED_NOTIFICATION){
+            Log.d("toto", data + " - state: " + mOoyalaPlayer.getState());
         }
-    }
-
-    public void seek(int playHeadTime) {
-        mOoyalaPlayer.seek(playHeadTime);
+        if (data == OoyalaPlayer.AD_STARTED_NOTIFICATION){
+            Log.d("toto", data + " - state: " + mOoyalaPlayer.getState());
+        }
     }
 }

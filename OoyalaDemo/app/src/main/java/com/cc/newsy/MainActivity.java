@@ -1,4 +1,4 @@
-package com.cc.ooyalademo;
+package com.cc.newsy;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                player.playVideo("FyeXMwMTE6py3n4C-01_5YPocNUioifO");
+                player.playVideo("d3ZGEyMTE6O2o1GFPDDF0yZwx__Ig_RZ");
             }
         });
     }

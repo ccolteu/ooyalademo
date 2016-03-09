@@ -1,4 +1,4 @@
-package com.cc.ooyalademo;
+package com.cc.newsy;
 
 import org.junit.Test;
 
